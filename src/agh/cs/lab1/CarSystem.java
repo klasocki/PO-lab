@@ -4,12 +4,15 @@ public class CarSystem {
     public static void main(String[] args) {
         System.out.println("System start");
 
-        run();
+        String[] runArguments = {"Very", "Very", "Fast"};
+
+        run(runArguments);
 
         System.out.println("System finish");
     }
 
-    private static void run() {
+    private static void run(String[] args) {
         System.out.println("Car is moving forward");
+        System.out.println(String.join(", ", args));
     }
 }
