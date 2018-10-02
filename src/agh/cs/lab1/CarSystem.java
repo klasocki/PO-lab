@@ -13,7 +13,21 @@ public class CarSystem {
     }
 
     private static void run(String[] args) {
-        System.out.println("Car is moving forward");
-        System.out.println(String.join(", ", args));
+        for (String dir : args) {
+            switch (dir) {
+                case "f":
+                    System.out.println("Moving forward");
+                    break;
+                case "b":
+                    System.out.println("Moving backward");
+                    break;
+                case "l":
+                    System.out.println("Moving left");
+                    break;
+                case "r":
+                    System.out.println("Moving right");
+                    break;
+            }
+        }
     }
 }
