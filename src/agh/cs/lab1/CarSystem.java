@@ -7,6 +7,7 @@ public class CarSystem {
         String[] runArguments = {"Very", "Very", "Fast"};
 
         run(runArguments);
+        run(args);
 
         System.out.println("System finish");
     }
