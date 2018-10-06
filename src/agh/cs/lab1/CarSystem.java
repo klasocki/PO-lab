@@ -1,44 +1,40 @@
 package agh.cs.lab1;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.stream.Stream;
+
 public class CarSystem {
     public static void main(String[] args) {
         System.out.println("System start");
 
+        Stream<Direction> runArguments = Arrays.stream(args)
+                .map(a -> stringToDir(a))
+                .filter(a -> a != null);
 
-        Direction[] runArguments = new Direction[args.length];
-        for (int i=0; i<args.length; i++) {
-            try {
-                runArguments[i] = stringToDir(args[i]);
-            } catch (Exception e) {
-                System.out.println("Wrong argument type: " + args[i]);
-
-            }
-        }
         run(runArguments);
-
 
         System.out.println("System finish");
     }
 
-    private static void run(Direction[] args) {
-        for (Direction dir : args) {
-
-            try {
-                switch (dir) {
-                    case FORWARD:
-                        System.out.println("Moving forward");
-                        break;
-                    case BACKWARD:
-                        System.out.println("Moving backward");
-                        break;
-                    case LEFT:
-                        System.out.println("Moving left");
-                        break;
-                    case RIGHT:
-                        System.out.println("Moving right");
-                        break;
-                }
-            } catch (Exception e) { }
+    private static void run(Stream<Direction> args) {
+        for (Iterator<Direction> i = args.iterator(); i.hasNext(); ) {
+            switch (i.next()) {
+                case FORWARD:
+                    System.out.println("Moving forward");
+                    break;
+                case BACKWARD:
+                    System.out.println("Moving backward");
+                    break;
+                case LEFT:
+                    System.out.println("Moving left");
+                    break;
+                case RIGHT:
+                    System.out.println("Moving right");
+                    break;
+                default:
+                    System.out.println("Wrong direction");
+            }
         }
     }
 
@@ -46,20 +42,20 @@ public class CarSystem {
         Direction result;
         switch (dir) {
             case "f":
-                result= Direction.FORWARD;
-            break;
+                result = Direction.FORWARD;
+                break;
             case "b":
-                result= Direction.BACKWARD;
-            break;
+                result = Direction.BACKWARD;
+                break;
             case "l":
-                result= Direction.LEFT;
-            break;
+                result = Direction.LEFT;
+                break;
             case "r":
-                result= Direction.BACKWARD;
-            break;
+                result = Direction.RIGHT;
+                break;
             default:
-                throw new RuntimeException("Wrong direction keyword");
+                result = null;
         }
-       return result;
+        return result;
     }
 }
