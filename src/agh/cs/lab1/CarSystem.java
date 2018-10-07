@@ -9,7 +9,7 @@ public class CarSystem {
         System.out.println("System start");
 
         Stream<Direction> runArguments = Arrays.stream(args)
-                .map(a -> stringToDir(a))
+                .map(a -> Direction.stringToDir(a))
                 .filter(a -> a != null);
 
         run(runArguments);
@@ -38,24 +38,4 @@ public class CarSystem {
         }
     }
 
-    private static Direction stringToDir(String dir) {
-        Direction result;
-        switch (dir) {
-            case "f":
-                result = Direction.FORWARD;
-                break;
-            case "b":
-                result = Direction.BACKWARD;
-                break;
-            case "l":
-                result = Direction.LEFT;
-                break;
-            case "r":
-                result = Direction.RIGHT;
-                break;
-            default:
-                result = null;
-        }
-        return result;
-    }
 }
