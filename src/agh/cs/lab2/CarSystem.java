@@ -2,6 +2,10 @@ package agh.cs.lab2;
 
 public class CarSystem {
     public static void main(String[] args) {
-        System.out.println(new Position(4,-5).toString());
+        Position position1 = new Position(1,2);
+        System.out.println(position1);
+        Position position2 = new Position(-2,1);
+        System.out.println(position2);
+        System.out.println(position1.add(position2));
     }
 }
