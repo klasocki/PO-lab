@@ -26,6 +26,8 @@ public enum MapDirection {
     }
     public MapDirection previous() {
         int index = this.ordinal();
-        return MapDirection.values()[(index-1)%numberOfDirections];
+        if(index==0) index=numberOfDirections-1;
+        else index-=1;
+        return MapDirection.values()[index];
     }
 }
