@@ -8,18 +8,19 @@ public class CarSystem {
     public static void main(String[] args) {
         System.out.println("System start");
 
-        Stream<Direction> runArguments = Arrays.stream(args)
+        Direction[] runArguments = Arrays.stream(args)
                 .map(a -> Direction.stringToDir(a))
-                .filter(a -> a != null);
+                .filter(a -> a != null)
+                .toArray(Direction[]::new);
 
         run(runArguments);
 
         System.out.println("System finish");
     }
 
-    private static void run(Stream<Direction> args) {
-        for (Iterator<Direction> i = args.iterator(); i.hasNext(); ) {
-            switch (i.next()) {
+    private static void run(Direction[] args) {
+        for (Direction direction : args) {
+            switch (direction) {
                 case FORWARD:
                     System.out.println("Moving forward");
                     break;
