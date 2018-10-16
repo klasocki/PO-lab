@@ -16,8 +16,8 @@ public class Position {
         return "(" + this.x + "," + this.y + ")";
     }
 
-    public boolean smaller(Position other) { return other.x<this.x && other.y<this.y; }
-    public boolean larger(Position other) { return other.x>this.x && other.y>this.y; }
+    public boolean smaller(Position other) { return other.x<=this.x && other.y<=this.y; }
+    public boolean larger(Position other) { return other.x>=this.x && other.y>=this.y; }
 
     public Position upperRight(Position other) {
         int newX = Math.max(this.x, other.x);
@@ -34,7 +34,9 @@ public class Position {
     public Position add(Position other) {
         return new Position(this.x + other.x, this.y + other.y);
     }
-
+    public Position opposite(){
+        return new Position(-this.x, -this.y);
+    }
     public boolean equals(Object other) {
         if(this==other) return true;
         if(!(other instanceof Position)) return false;
