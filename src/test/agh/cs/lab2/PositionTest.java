@@ -17,6 +17,7 @@ public class PositionTest {
     @Test
     public void smallerTest() {
         assertTrue(new Position(2, 3).smaller(new Position(-1, 2)));
+        assertTrue(new Position(2, 3).smaller(new Position(2, 3)));
         assertFalse(new Position(5, 3).smaller(new Position(4, 6)));
         assertFalse(new Position(5, 3).smaller(new Position(43, -6)));
         assertFalse(new Position(5, 3).smaller(new Position(2354, 6)));
@@ -25,6 +26,7 @@ public class PositionTest {
     @Test
     public void largerTest() {
         assertTrue(new Position(-2, -3).larger(new Position(-1, 2)));
+        assertTrue(new Position(-2, -3).larger(new Position(-2, -3)));
         assertFalse(new Position(5, 3).larger(new Position(4, 6)));
         assertFalse(new Position(5, 3).larger(new Position(43, -6)));
         assertFalse(new Position(5, 3).larger(new Position(-2354, -6)));
