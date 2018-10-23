@@ -4,11 +4,24 @@ import agh.cs.lab2.MapDirection;
 import agh.cs.lab2.MoveDirection;
 import agh.cs.lab2.Position;
 import javafx.geometry.Pos;
+import lab4.IWorldMap;
 
 public class Car {
     private MapDirection orientation = MapDirection.NORTH;
     private Position position = new Position(2, 2);
-    final int mapSize = 5;
+    private IWorldMap map;
+
+    public Car(IWorldMap map) {
+        this.map = map;
+    }
+
+    public Car(Position position, IWorldMap map) {
+        this.position = position;
+        this.map = map;
+    }
+
+    public Car() {
+    }
 
     private Position getUnitVector(boolean movingForward) {
         Position result;
@@ -35,7 +48,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Position: " + position.toString() + "\nOrientation: " + orientation.toString();
+        return orientation.toString();
     }
 
 
@@ -65,12 +78,13 @@ public class Car {
         } else {
             result = position.add(this.getUnitVector(false));
         }
-        if (isValidMove(result)) {
+        if (map.canMoveTo(result)) {
             this.position = result;
         }
     }
 
-    private boolean isValidMove(Position position) {
-        return position.x >= 0 && position.x < mapSize && position.y >= 0 && position.y < mapSize;
+
+    public Position getPosition() {
+        return position;
     }
 }

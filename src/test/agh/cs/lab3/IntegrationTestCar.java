@@ -6,7 +6,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class IntegrationTestCar {
-    @Test
+   /*
+   These tests are for the older version of Car class. Kept here for future reference
+
+   @Test
     public void moveTest() {
         String[] testCommands = {"forward", "r", "wepto3twq", "backward", "b", "l", "left", "f", "f", "f"};
         MoveDirection[] commands = OptionsParser.parse(testCommands);
@@ -24,5 +27,5 @@ public class IntegrationTestCar {
         for (MoveDirection dir : commands) {
             car.move(dir);
         }
-    }
+    }*/
 }
