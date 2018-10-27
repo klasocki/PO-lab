@@ -41,7 +41,7 @@ public class RectangularMap implements IWorldMap {
     public void run(MoveDirection[] directions) {
         for (int i = 0; i < directions.length; i++) {
             carsOnMap.get(i%carsOnMap.size()). //this is iterating through all the cars,
-                    // giving them directions, and coming back to the first one when all cars have finished moving
+                    // giving them directions, and coming back to the first one when all cars have already moved
                     move(directions[i]);
             System.out.println(draw());
         }
