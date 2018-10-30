@@ -26,6 +26,7 @@ public class RectangularMap implements IWorldMap {
     @Override
     public boolean canMoveTo(Position position) {
         return position.x >= 0 && position.x < width && position.y >= 0 && position.y < height && !isOccupied(position);
+        //TODO this should use smaller and larger methods
     }
 
     @Override
@@ -70,6 +71,7 @@ public class RectangularMap implements IWorldMap {
     }
 
     public String draw() {
-       return mapVisualizer.draw(new Position(0,0), new Position(width-1, height-1));
+        //TODO these Positions should be initialised and made final as variables, to avoid unnecessary object creation
+        return mapVisualizer.draw(new Position(0,0), new Position(width-1, height-1));
     }
 }

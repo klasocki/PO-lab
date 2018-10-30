@@ -5,8 +5,9 @@ import agh.cs.lab2.MoveDirection;
 import agh.cs.lab2.Position;
 import javafx.geometry.Pos;
 import lab4.IWorldMap;
+import lab5.IMapElement;
 
-public class Car {
+public class Car implements IMapElement {
     private MapDirection orientation = MapDirection.NORTH;
     private Position position = new Position(2, 2);
     private IWorldMap map;
