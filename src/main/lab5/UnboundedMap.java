@@ -11,17 +11,13 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class UnboundedMap implements IWorldMap {
-    private ArrayList<IMapElement> mapElements;
+    private ArrayList<IMapElement> mapElements ;
     MapVisualizer mapVisualizer;
 
     public UnboundedMap(ArrayList<HayStack> hayStacks) {
-        this.mapElements.addAll( hayStacks);
+        mapElements = new ArrayList<>();
+        this.mapElements.addAll(hayStacks);
         mapVisualizer = new MapVisualizer(this);
-    }
-
-    @Override
-    public String toString() {
-        return "";
     }
 
     @Override
@@ -48,6 +44,7 @@ public class UnboundedMap implements IWorldMap {
             System.out.println(toString());
         }
     }
+
     private ArrayList<Car> filterToCars(ArrayList<IMapElement> mapElements, Predicate predicate) {
         Car[] result = (Car[])Arrays.stream(mapElements.toArray())
                 .filter(predicate)
@@ -61,11 +58,21 @@ public class UnboundedMap implements IWorldMap {
         }
         return null;
     }
-
     @Override
     public boolean isOccupied(Position position) {
         if(objectAt(position)==null) return false;
         return true;
     }
 
+
+    @Override
+    public String toString() {
+        Position lowerLeft = mapElements.get(0).getPosition();
+        Position upperRight = lowerLeft;
+        for (int i = 1; i < mapElements.size(); i++) {
+            lowerLeft = mapElements.get(i).getPosition().lowerLeft(lowerLeft);
+            upperRight = mapElements.get(i).getPosition().upperRight(upperRight);
+        }
+        return mapVisualizer.draw(lowerLeft,upperRight);
+    }
 }
