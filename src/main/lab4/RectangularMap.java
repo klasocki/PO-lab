@@ -28,12 +28,12 @@ public class RectangularMap implements IWorldMap {
 
     @Override
     public boolean canMoveTo(Position position) {
-        return upperRight.smaller(position) && lowerLeft.larger(position);
+        return upperRight.smaller(position) && lowerLeft.larger(position) && !isOccupied(position);
     }
 
     @Override
     public boolean place(Car car) {
-        if (!isOccupied(car.getPosition())) {
+        if (canMoveTo(car.getPosition())) {
             carsOnMap.add(car);
             return true;
         }
