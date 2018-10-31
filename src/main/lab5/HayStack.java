@@ -17,4 +17,12 @@ public class HayStack implements IMapElement{
     public String toString() {
         return "s";
     }
+
+    public boolean equals(Object other) {
+        //Warning, this does not check if maps are equal
+        if(this==other) return true;
+        if(!(other instanceof HayStack)) return false;
+        HayStack another = (HayStack) other;
+        return another.getPosition().equals(this.getPosition());
+    }
 }
