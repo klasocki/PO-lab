@@ -8,10 +8,11 @@ import lab4.MapVisualizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 public class UnboundedMap implements IWorldMap {
-    private ArrayList<IMapElement> mapElements ;
+    private List<IMapElement> mapElements ;
     MapVisualizer mapVisualizer;
 
     public UnboundedMap(ArrayList<HayStack> hayStacks) {
@@ -36,7 +37,7 @@ public class UnboundedMap implements IWorldMap {
 
     @Override
     public void run(MoveDirection[] directions) {
-        ArrayList<Car> carsOnMap = filterToCars(mapElements, o -> (o instanceof Car) );
+        List<Car> carsOnMap = filterToCars(mapElements, o -> (o instanceof Car) );
         for (int i = 0; i < directions.length; i++) {
             carsOnMap.get(i%carsOnMap.size()). //this is iterating through all the cars,
                     // giving them directions, and coming back to the first one when all cars have already moved
@@ -45,11 +46,11 @@ public class UnboundedMap implements IWorldMap {
         }
     }
 
-    private ArrayList<Car> filterToCars(ArrayList<IMapElement> mapElements, Predicate predicate) {
+    private List<Car> filterToCars(List<IMapElement> mapElements, Predicate predicate) {
         Car[] result = (Car[])Arrays.stream(mapElements.toArray())
                 .filter(predicate)
                 .toArray(Car[]::new);
-        return new ArrayList<Car>(Arrays.asList(result));
+        return new ArrayList<>(Arrays.asList(result));
     }
     @Override
     public Object objectAt(Position position) {

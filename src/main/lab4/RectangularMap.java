@@ -3,7 +3,6 @@ package lab4;
 import agh.cs.lab2.MoveDirection;
 import agh.cs.lab2.Position;
 import agh.cs.lab3.Car;
-import agh.cs.lab3.OptionsParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +12,8 @@ public class RectangularMap implements IWorldMap {
     final int height;
     private List<Car> carsOnMap;
     MapVisualizer mapVisualizer;
+    final Position lowerLeft;
+    final Position upperRight;
 
 
     public RectangularMap(int width, int height) {
@@ -21,12 +22,13 @@ public class RectangularMap implements IWorldMap {
         this.height = height;
         carsOnMap = new ArrayList<>();
         mapVisualizer = new MapVisualizer(this);
+        upperRight = new Position(width-1, height-1);
+        lowerLeft = new Position(0,0);
     }
 
     @Override
     public boolean canMoveTo(Position position) {
-        return position.x >= 0 && position.x < width && position.y >= 0 && position.y < height && !isOccupied(position);
-        //TODO this should use smaller and larger methods
+        return upperRight.smaller(position) && lowerLeft.larger(position);
     }
 
     @Override
@@ -67,11 +69,10 @@ public class RectangularMap implements IWorldMap {
 
     @Override
     public String toString() {
-        return mapVisualizer.toString();
+        return draw();
     }
 
     public String draw() {
-        //TODO these Positions should be initialised and made final as variables, to avoid unnecessary object creation
-        return mapVisualizer.draw(new Position(0,0), new Position(width-1, height-1));
+        return mapVisualizer.draw(lowerLeft, upperRight);
     }
 }
