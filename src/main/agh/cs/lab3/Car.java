@@ -21,7 +21,7 @@ public class Car implements IMapElement {
         this.map = map;
     }
 
-    public Car() {
+    Car() {
     }
 
     private Position getUnitVector(boolean movingForward) {
@@ -87,5 +87,12 @@ public class Car implements IMapElement {
 
     public Position getPosition() {
         return position;
+    }
+    public boolean equals(Object other) {
+        //Warning, this does not check if maps are equal
+        if(this==other) return true;
+        if(!(other instanceof Car)) return false;
+        Car another = (Car) other;
+        return another.getPosition().equals(this.getPosition()) && another.orientation.equals(this.orientation);
     }
 }
