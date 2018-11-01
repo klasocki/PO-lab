@@ -12,6 +12,6 @@ public class CarSystem {
         map.place(new Car(map));
         map.place(new Car(new Position(3,4), map));
         map.run(directions);
-        System.out.println(((RectangularMap) map).draw());
+        System.out.println(((RectangularMap) map).toString());
     }
 }

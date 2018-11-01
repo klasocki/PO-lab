@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class UnboundedMapTest {
-
+//TODO report mapVisualizer's problem with negative numbers
 
     final static Position[] carPositions = {
             new Position(2, 2),
