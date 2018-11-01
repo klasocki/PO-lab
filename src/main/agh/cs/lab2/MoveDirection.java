@@ -5,6 +5,7 @@ public enum MoveDirection {
 
     public static MoveDirection stringToDir(String dir) {
         MoveDirection result;
+        dir=dir.toLowerCase().trim();
         switch (dir) {
             case "f":
             case "forward":
