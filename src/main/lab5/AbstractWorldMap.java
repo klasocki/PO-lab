@@ -7,9 +7,9 @@ import lab4.IWorldMap;
 import lab4.MapVisualizer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public abstract class AbstractWorldMap implements IWorldMap {
     protected List<IMapElement> mapElements;
@@ -48,7 +48,8 @@ public abstract class AbstractWorldMap implements IWorldMap {
 
     @Override
     public void run(MoveDirection[] directions) {
-        List<Car> carsOnMap = filterToCars(mapElements, o -> (o instanceof Car) );
+        ListFilter<Car, IMapElement> filter = new ListFilter<>();
+        List<Car> carsOnMap = filter.filterToType(mapElements, o -> (o instanceof Car) );
         for (int i = 0; i < directions.length; i++) {
             carsOnMap.get(i%carsOnMap.size()). //this is iterating through all the cars,
                     // giving them directions, and coming back to the first one when all cars have already moved
@@ -57,11 +58,19 @@ public abstract class AbstractWorldMap implements IWorldMap {
         }
     }
 
-    private List<Car> filterToCars(List<IMapElement> mapElements, Predicate predicate) {
+    /*private List<Car> filterToCars(List<IMapElement> mapElements, Predicate predicate) {
         Car[] result = (Car[]) Arrays.stream(mapElements.toArray())
                 .filter(predicate)
                 .toArray(Car[]::new);
         return new ArrayList<>(Arrays.asList(result));
+    }*/
+
+    private static class ListFilter<To,From> {
+        List<To> filterToType(List<From> list, Predicate predicate) {
+             return (List<To>)list.stream()
+                    .filter(predicate)
+                     .collect(Collectors.toList());
+        }
     }
 
 }
