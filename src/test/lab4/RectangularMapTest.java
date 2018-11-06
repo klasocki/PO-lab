@@ -2,6 +2,7 @@ package lab4;
 
 import agh.cs.lab2.Position;
 import agh.cs.lab3.Car;
+import agh.cs.lab3.OptionsParser;
 import javafx.geometry.Pos;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -35,8 +36,7 @@ public class RectangularMapTest {
             new Position(0, 235),
     };
 
-    @BeforeClass
-    public static void placeCars() {
+    public static void placeCars(IWorldMap map) {
         map.place(new Car(map)); //default Position is (2,2)
         for (Position p : properPositions) {
             map.place(new Car(p, map));
@@ -47,12 +47,14 @@ public class RectangularMapTest {
     }
     @Test
     public void place() {
+        placeCars(map);
         //how to test this better? Reflection?
         System.out.println(map.toString());
     }
 
     @Test
     public void isOccupied() {
+        placeCars(map);
         for (Position p : properPositions) {
             assertTrue(map.isOccupied(p));
         }
@@ -65,6 +67,7 @@ public class RectangularMapTest {
 
     @Test
     public void objectAt() {
+        placeCars(map);
         for (Position p : improperPositions) {
             assertEquals(map.objectAt(p), null);
         }
@@ -75,6 +78,7 @@ public class RectangularMapTest {
 
     @Test
     public void canMoveTo() {
+        placeCars(map);
         for (Position p : properPositions) {
             assertFalse(map.canMoveTo(p));
         }
@@ -90,6 +94,14 @@ public class RectangularMapTest {
 
     @Test
     public void run() {
+        IWorldMap mapForRun = new RectangularMap(5, 4);
+        placeCars(mapForRun);
+
+
+        String[] dir = {
+                "espfok,", "r", "b", "BACKWARD", "forward", "l", "l", "r", "f", "f", "l", "b", "b", "f", "f", "asf3"
+        };
+        mapForRun.run(OptionsParser.parse(dir));
     }
 
 }
