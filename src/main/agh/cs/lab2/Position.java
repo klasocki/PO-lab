@@ -2,6 +2,8 @@ package agh.cs.lab2;
 
 import javafx.geometry.Pos;
 
+import java.util.Objects;
+
 public class Position {
     public final int x;
     public final int y;
@@ -42,5 +44,10 @@ public class Position {
         if(!(other instanceof Position)) return false;
         Position another = (Position) other;
         return another.x == this.x && another.y == this.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

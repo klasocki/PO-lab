@@ -14,31 +14,29 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class UnboundedMapTest {
-    //TODO report mapVisualizer's problem with negative numbers
-//TODO how to test run efficiently?
-    final static Position[] carPositions = {
-            new Position(2, 2),
+    final Position[] carPositions = {
+            //new Position(2, 2),
             new Position(0, 0),
             new Position(1, 3),
     };
 
-    final static Position[] hayPositions = {
+    final Position[] hayPositions = {
             new Position(-1, 0),
             new Position(0, -1),
             new Position(-54, -1),
             new Position(6, 7),
             new Position(0, 23),
     };
-    final static Position[] untakenPositions = {
+    final Position[] untakenPositions = {
             new Position(-11, 0),
             new Position(0, -15),
             new Position(0, -8),
             new Position(58, 7),
             new Position(0, 22),
     };
-    static ArrayList<HayStack> hayStacks;
+    ArrayList<HayStack> hayStacks;
 
-    public static IWorldMap placeCars() {
+    public IWorldMap placeCars() throws IllegalArgumentException {
         hayStacks = new ArrayList<>();
         for (Position p : hayPositions) {
             hayStacks.add(new HayStack(p));
@@ -51,7 +49,7 @@ public class UnboundedMapTest {
         return map;
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void place() {
         IWorldMap map = placeCars();
         for (Position p : hayPositions) {
@@ -106,14 +104,17 @@ public class UnboundedMapTest {
         }
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void run() {
+
         IWorldMap map = placeCars();
 
         String[] dir = {
                 "espfok,", "r", "b", "BACKWARD", "forward", "l", "l", "r", "f", "f", "l", "b", "b", "f", "f", "asf3"
         };
         map.run(OptionsParser.parse(dir));
+
+
     }
 
 }

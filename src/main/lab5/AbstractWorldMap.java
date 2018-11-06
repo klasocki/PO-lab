@@ -7,25 +7,24 @@ import lab4.IWorldMap;
 import lab4.MapVisualizer;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class AbstractWorldMap implements IWorldMap {
-    protected List<IMapElement> mapElements;
+    protected Map<Position, IMapElement> mapElements;
     protected MapVisualizer mapVisualizer;
 
     public AbstractWorldMap() {
-        mapElements = new ArrayList<>();
+        mapElements = new LinkedHashMap<>();
         mapVisualizer = new MapVisualizer(this);
     }
 
     @Override
     public Object objectAt(Position position) {
-        for (IMapElement mapElement : mapElements) {
-            if(mapElement.getPosition().equals(position)) return mapElement;
-        }
-        return null;
+        return mapElements.get(position);
     }
     @Override
     public boolean isOccupied(Position position) {
@@ -38,18 +37,18 @@ public abstract class AbstractWorldMap implements IWorldMap {
     }
 
     @Override
-    public boolean place(Car car) {
+    public void place(Car car) throws IllegalArgumentException{
         if (canMoveTo(car.getPosition())) {
-            mapElements.add(car);
-            return true;
-        }
-        return false;
+            mapElements.put(car.getPosition(), car);
+        } else throw new IllegalArgumentException("Cannot place car at " + car.getPosition()
+                + ", position is already taken or invalid");
     }
+
 
     @Override
     public void run(MoveDirection[] directions) {
         ListFilter<Car, IMapElement> filter = new ListFilter<>();
-        List<Car> carsOnMap = filter.filterToType(mapElements, o -> (o instanceof Car) );
+        List<Car> carsOnMap = filter.filterToType(new ArrayList<>(mapElements.values()), o -> (o instanceof Car));
         for (int i = 0; i < directions.length; i++) {
             carsOnMap.get(i%carsOnMap.size()). //this is iterating through all the cars,
                     // giving them directions, and coming back to the first one when all cars have already moved

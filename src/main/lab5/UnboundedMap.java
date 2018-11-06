@@ -6,7 +6,9 @@ import java.util.ArrayList;
 public class UnboundedMap extends AbstractWorldMap {
 
     public UnboundedMap(ArrayList<HayStack> hayStacks) {
-        this.mapElements.addAll(hayStacks);
+        for (HayStack hs : hayStacks) {
+            this.mapElements.put(hs.getPosition(), hs);
+        }
     }
 
     @Override

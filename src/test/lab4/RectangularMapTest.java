@@ -16,16 +16,16 @@ import static org.junit.Assert.*;
 public class RectangularMapTest {
     static final int height = 4;
     static final int width = 5;
-    static final IWorldMap map = new RectangularMap(width, height);
+    final IWorldMap map = new RectangularMap(width, height);
 
-    final static Position[] properPositions = {
-            new Position(2, 2),
-            new Position(width - 1, height - 1),
+    final Position[] properPositions = {
+           // new Position(2, 2),
+            //new Position(width - 1, height - 1),
             new Position(0, 0),
             new Position(1, 3),
     };
 
-    final static Position[] improperPositions = {
+    final  Position[] improperPositions = {
             new Position(-1, 0),
             new Position(0, -1),
             new Position(-547, -1),
@@ -36,14 +36,14 @@ public class RectangularMapTest {
             new Position(0, 235),
     };
 
-    public static void placeCars(IWorldMap map) {
+    public void placeCars(IWorldMap map) {
         map.place(new Car(map)); //default Position is (2,2)
         for (Position p : properPositions) {
             map.place(new Car(p, map));
         }
-        for (Position p : improperPositions) {
+        /*for (Position p : improperPositions) {
             map.place(new Car(p, map));
-        }
+        }*/
     }
     @Test
     public void place() {
@@ -92,7 +92,7 @@ public class RectangularMapTest {
         assertTrue(map.canMoveTo(new Position(3, 3)));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void run() {
         IWorldMap mapForRun = new RectangularMap(5, 4);
         placeCars(mapForRun);

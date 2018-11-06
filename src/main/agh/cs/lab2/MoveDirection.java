@@ -3,7 +3,7 @@ package agh.cs.lab2;
 public enum MoveDirection {
     FORWARD, BACKWARD, RIGHT, LEFT;
 
-    public static MoveDirection stringToDir(String dir) {
+    public static MoveDirection stringToDir(String dir) throws IllegalArgumentException {
         MoveDirection result;
         dir=dir.toLowerCase().trim();
         switch (dir) {
@@ -24,7 +24,7 @@ public enum MoveDirection {
                 result = RIGHT;
                 break;
             default:
-                result = null;
+                throw new IllegalArgumentException(dir + " is not legal move specification");
         }
         return result;
     }
