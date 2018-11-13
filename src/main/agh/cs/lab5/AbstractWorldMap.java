@@ -15,13 +15,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
-    protected Map<Position, IMapElement> mapElements;
-    protected MapVisualizer mapVisualizer;
-
-    public AbstractWorldMap() {
-        mapElements = new LinkedHashMap<>();
-        mapVisualizer = new MapVisualizer(this);
-    }
+    protected Map<Position, IMapElement> mapElements = new LinkedHashMap<>();
+    protected MapVisualizer mapVisualizer = new MapVisualizer(this);
 
     @Override
     public Object objectAt(Position position) {
@@ -41,6 +36,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     public void place(Car car) throws IllegalArgumentException{
         if (canMoveTo(car.getPosition())) {
             mapElements.put(car.getPosition(), car);
+            car.addObserver(this);
         } else throw new IllegalArgumentException("Cannot place car at " + car.getPosition()
                 + ", position is already taken or invalid");
     }

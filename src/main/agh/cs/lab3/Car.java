@@ -15,19 +15,19 @@ public class Car implements IMapElement {
     private MapDirection orientation = MapDirection.NORTH;
     private Position position = new Position(2, 2);
     private IWorldMap map;
-    private List<IPositionChangeObserver> observers;
+    private List<IPositionChangeObserver> observers = new LinkedList<>();
 
     public Car(IWorldMap map) {
         this.map = map;
     }
 
     public Car(Position position, IWorldMap map) {
+        this();
         this.position = position;
         this.map = map;
-        observers = new LinkedList<>();
     }
 
-    Car() {} //This is here for Main from lab3 to compile
+    public Car() {} //This is here for Main from lab3 to compile
 
     @Override
     public String toString() {

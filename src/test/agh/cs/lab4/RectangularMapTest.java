@@ -92,10 +92,18 @@ public class RectangularMapTest {
     public void run() {
         IWorldMap mapForRun = new RectangularMap(5, 4);
         placeCars(mapForRun);
-
-
         String[] dir = {
                 "espfok,", "r", "b", "BACKWARD", "forward", "l", "l", "r", "f", "f", "l", "b", "b", "f", "f", "asf3"
+        };
+        mapForRun.run(OptionsParser.parse(dir));
+    }
+
+    @Test
+    public void properRun() {
+        IWorldMap mapForRun = new RectangularMap(5, 4);
+        placeCars(mapForRun);
+        String[] dir = {
+                "r", "b", "BACKWARD", "forward", "l", "l", "r", "f", "f", "l", "b", "b", "f", "f"
         };
         mapForRun.run(OptionsParser.parse(dir));
     }

@@ -110,8 +110,14 @@ public class UnboundedMapTest {
                 "espfok,", "r", "b", "BACKWARD", "forward", "l", "l", "r", "f", "f", "l", "b", "b", "f", "f", "asf3"
         };
         map.run(OptionsParser.parse(dir));
-
-
     }
 
+    @Test
+    public void properRun() {
+        IWorldMap mapForRun = placeCars();
+        String[] dir = {
+                "r", "b", "BACKWARD", "forward", "l", "l", "r", "f", "f", "l", "b", "b", "f", "f"
+        };
+        mapForRun.run(OptionsParser.parse(dir));
+    }
 }
