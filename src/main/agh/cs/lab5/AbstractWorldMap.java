@@ -5,6 +5,7 @@ import agh.cs.lab2.Position;
 import agh.cs.lab3.Car;
 import agh.cs.lab4.IWorldMap;
 import agh.cs.lab4.MapVisualizer;
+import agh.cs.lab7.IPositionChangeObserver;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public abstract class AbstractWorldMap implements IWorldMap {
+public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     protected Map<Position, IMapElement> mapElements;
     protected MapVisualizer mapVisualizer;
 
@@ -53,13 +54,15 @@ public abstract class AbstractWorldMap implements IWorldMap {
             //this is iterating through all the cars,
             // giving them directions, and coming back to the first one when all cars have already moved
             Car car = carsOnMap.get(i%carsOnMap.size());
-            Position oldPos = car.getPosition();
             car.move(directions[i]);
-            if (!car.getPosition().equals(oldPos)) {
-                mapElements.remove(oldPos);
-                mapElements.put(car.getPosition(), car);
-            }
             System.out.println(toString());
+        }
+    }
+
+    @Override
+    public void positionChanged(Position oldPosition, Position newPosition) {
+        if (!newPosition.equals(oldPosition)) {
+            mapElements.put(newPosition, mapElements.remove(oldPosition));
         }
     }
 
