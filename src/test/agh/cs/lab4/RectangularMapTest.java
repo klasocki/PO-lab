@@ -1,13 +1,9 @@
-package lab4;
+package agh.cs.lab4;
 
 import agh.cs.lab2.Position;
 import agh.cs.lab3.Car;
 import agh.cs.lab3.OptionsParser;
-import javafx.geometry.Pos;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 

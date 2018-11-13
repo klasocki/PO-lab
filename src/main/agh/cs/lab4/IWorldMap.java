@@ -1,4 +1,4 @@
-package lab4;
+package agh.cs.lab4;
 
 import agh.cs.lab2.MoveDirection;
 import agh.cs.lab2.Position;

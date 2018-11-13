@@ -1,12 +1,9 @@
-package lab5;
+package agh.cs.lab5;
 
 import agh.cs.lab2.Position;
 import agh.cs.lab3.Car;
 import agh.cs.lab3.OptionsParser;
-import javafx.geometry.Pos;
-import lab4.IWorldMap;
-import lab4.RectangularMap;
-import org.junit.BeforeClass;
+import agh.cs.lab4.IWorldMap;
 import org.junit.Test;
 
 import java.util.ArrayList;

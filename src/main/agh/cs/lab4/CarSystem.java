@@ -1,9 +1,7 @@
-package lab4;
+package agh.cs.lab4;
 
-import agh.cs.lab2.MoveDirection;
 import agh.cs.lab2.Position;
 import agh.cs.lab3.Car;
-import agh.cs.lab3.OptionsParser;
 
 public class CarSystem {
     public static void main(String[] args) {

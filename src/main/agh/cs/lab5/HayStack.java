@@ -1,4 +1,4 @@
-package lab5;
+package agh.cs.lab5;
 
 import agh.cs.lab2.Position;
 

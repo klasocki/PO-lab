@@ -1,7 +1,7 @@
-package lab4;
+package agh.cs.lab4;
 
 import agh.cs.lab2.Position;
-import lab5.AbstractWorldMap;
+import agh.cs.lab5.AbstractWorldMap;
 
 public class RectangularMap extends AbstractWorldMap {
     final int width;

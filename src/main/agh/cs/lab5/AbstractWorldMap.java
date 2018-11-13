@@ -1,10 +1,10 @@
-package lab5;
+package agh.cs.lab5;
 
 import agh.cs.lab2.MoveDirection;
 import agh.cs.lab2.Position;
 import agh.cs.lab3.Car;
-import lab4.IWorldMap;
-import lab4.MapVisualizer;
+import agh.cs.lab4.IWorldMap;
+import agh.cs.lab4.MapVisualizer;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -50,9 +50,15 @@ public abstract class AbstractWorldMap implements IWorldMap {
         ListFilter<Car, IMapElement> filter = new ListFilter<>();
         List<Car> carsOnMap = filter.filterToType(new ArrayList<>(mapElements.values()), o -> (o instanceof Car));
         for (int i = 0; i < directions.length; i++) {
-            carsOnMap.get(i%carsOnMap.size()). //this is iterating through all the cars,
-                    // giving them directions, and coming back to the first one when all cars have already moved
-                            move(directions[i]);
+            //this is iterating through all the cars,
+            // giving them directions, and coming back to the first one when all cars have already moved
+            Car car = carsOnMap.get(i%carsOnMap.size());
+            Position oldPos = car.getPosition();
+            car.move(directions[i]);
+            if (!car.getPosition().equals(oldPos)) {
+                mapElements.remove(oldPos);
+                mapElements.put(car.getPosition(), car);
+            }
             System.out.println(toString());
         }
     }

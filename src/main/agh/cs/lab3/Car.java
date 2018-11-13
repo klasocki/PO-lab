@@ -3,8 +3,8 @@ package agh.cs.lab3;
 import agh.cs.lab2.MapDirection;
 import agh.cs.lab2.MoveDirection;
 import agh.cs.lab2.Position;
-import lab4.IWorldMap;
-import lab5.IMapElement;
+import agh.cs.lab4.IWorldMap;
+import agh.cs.lab5.IMapElement;
 
 public class Car implements IMapElement {
     private MapDirection orientation = MapDirection.NORTH;
